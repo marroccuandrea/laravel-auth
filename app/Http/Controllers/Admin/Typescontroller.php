@@ -77,19 +77,20 @@ class Typescontroller extends Controller
         );
         $exist = Type::where('title', $request->title)->first();
         if ($exist) {
-            return redirect()->route('admin.types.index')->with('error', 'Progetto già esistente');
+            return redirect()->route('admin.types.index')->with('error', 'Tipo già esistente');
         } else {
             $data['slug'] = Help::generateSlug($request->title, Type::class);
             $type->update($data);
-            return redirect()->route('admin.types.index')->with('success', 'Progetto modificato correttamente');
+            return redirect()->route('admin.types.index')->with('success', 'Tipo modificato correttamente');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Type $type)
     {
-        //
+        $type->delete();
+        return redirect()->route('admin.types.index')->with('success', 'Tipo eliminato correttamente');
     }
 }

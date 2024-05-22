@@ -88,8 +88,9 @@ class Tecnologiescontroller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Tecnology $tecnology)
     {
-        //
+        $tecnology->delete();
+        return redirect()->route('admin.tecnologies.index')->with('success', 'Linguaggio eliminato correttamente');
     }
 }

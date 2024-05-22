@@ -48,10 +48,15 @@
 
                         </form>
                     </td>
-                    <td>
-                        <button onclick="submitForm({{ $project->id }})" class="btn btn-warning"
+                    <td class="d-flex">
+                        <button onclick="submitForm({{ $project->id }})" class="me-2 btn btn-warning"
                             type="submit">Modifica</button>
-                        <button class="btn btn-danger">Elimina</button>
+                        <form action="{{ route('admin.tecnologies.destroy', $project) }}" method="POST"
+                            onsubmit="return confirm('Sei sicuro di voler cancellare l\'elemento?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Elimina</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
