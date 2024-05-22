@@ -2,6 +2,18 @@
 
 @section('content')
     <h2>Tecnologie</h2>
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+            @endforeach
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
     @if (session('error'))
         <div class="alert alert-danger" role="alert">
             {{ session('error') }}
@@ -32,16 +44,23 @@
                             id="form-edit-{{ $project->id }}">
                             @csrf
                             @method('PUT')
-                            <input type="text" value="{{ $project->title }}">
+                            <input type="text" value="{{ $project->title }}" name="title">
 
                         </form>
                     </td>
                     <td>
-                        <button class="btn btn-warning ">Modifica</button>
+                        <button onclick="submitForm({{ $project->id }})" class="btn btn-warning"
+                            type="submit">Modifica</button>
                         <button class="btn btn-danger">Elimina</button>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <script>
+        function submitForm(id) {
+            const form = document.getElementById(`form-edit-${id}`);
+            form.submit();
+        }
+    </script>
 @endsection
