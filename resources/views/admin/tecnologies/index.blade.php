@@ -25,10 +25,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($tecnologies as $item)
+            @foreach ($tecnologies as $project)
                 <tr>
                     <td>
-                        <input type="text" value="{{ $item->title }}">
+                        <form action="{{ route('admin.tecnologies.update', $project) }}" method="POST"
+                            id="form-edit-{{ $project->id }}">
+                            @csrf
+                            @method('PUT')
+                            <input type="text" value="{{ $project->title }}">
+
+                        </form>
                     </td>
                     <td>
                         <button class="btn btn-warning ">Modifica</button>
