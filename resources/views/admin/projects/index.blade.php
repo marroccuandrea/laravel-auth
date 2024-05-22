@@ -14,8 +14,8 @@
     @endif
 
     <form class="d-flex" action="{{ route('admin.projects.store') }}" method="POST">
-        <input class="form-control me-2" placeholder="Nuovo progetto" name="title">
         @csrf
+        <input class="form-control me-2" placeholder="Nuovo progetto" name="title">
         <button class="btn btn-success" type="submit">Aggiungi</button>
     </form>
     <table class="table">

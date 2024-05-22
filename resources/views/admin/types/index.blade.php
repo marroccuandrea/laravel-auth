@@ -2,6 +2,16 @@
 
 @section('content')
     <h2>Tipo</h2>
+    @if (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <table class="table">
         <form class="d-flex" action="{{ route('admin.types.store') }}" method="POST">
             @csrf
