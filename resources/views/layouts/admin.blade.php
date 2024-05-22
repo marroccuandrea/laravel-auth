@@ -19,13 +19,16 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="#"><i class="fa-solid fa-microchip"></i> Tecnology</a>
+                        <a href="{{ route('admin.tecnologies.index') }}"><i class="fa-solid fa-microchip px-1"></i>
+                            Tecnology</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa-solid fa-font-awesome"></i> Type</a>
+                        <a href="{{ route('admin.types.index') }}"><i class="fa-solid fa-font-awesome px-1"></i>
+                            Type</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a>
+                        <a href="{{ route('admin.projects.index') }}"><i class="fa-solid fa-diagram-project px-1 "></i>
+                            Projects</a>
                     </li>
                 </ul>
             </nav>

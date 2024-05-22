@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Tecnology;
+use App\Functions\Helper as Help;
 
 class Tecnologiescontroller extends Controller
 {
@@ -12,7 +14,8 @@ class Tecnologiescontroller extends Controller
      */
     public function index()
     {
-        //
+        $tecnologies = Tecnology::all();
+        return view('admin.tecnologies.index', compact('tecnologies'));
     }
 
     /**
@@ -28,7 +31,16 @@ class Tecnologiescontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $exist = Tecnology::where('title', $request->title)->first();
+        if ($exist) {
+            return redirect()->route('admin.tecnologies.index')->with('error', 'Linguaggio già esistente');
+        } else {
+            $new = new Tecnology();
+            $new->title = $request->title;
+            $new->slug = Help::generateSlug($new->title, Tecnology::class);
+            $new->save();
+            return redirect()->route('admin.tecnologies.index')->with('success', 'Linguaggio creato correttamente');
+        }
     }
 
     /**

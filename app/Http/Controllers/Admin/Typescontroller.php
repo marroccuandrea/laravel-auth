@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Type;
+use App\Functions\Helper as Help;
 
 class Typescontroller extends Controller
 {
@@ -12,7 +14,8 @@ class Typescontroller extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::all();
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -28,7 +31,16 @@ class Typescontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $exist = Type::where('title', $request->title)->first();
+        if ($exist) {
+            return redirect()->route('admin.types.index')->with('error', 'Tipo già esistente');
+        } else {
+            $new = new Type();
+            $new->title = $request->title;
+            $new->slug = Help::generateSlug($new->title, Type::class);
+            $new->save();
+            return redirect()->route('admin.types.index')->with('success', 'Tipo creato correttamente');
+        }
     }
 
     /**

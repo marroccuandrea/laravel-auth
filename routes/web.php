@@ -29,7 +29,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('home');
         Route::resource('projects', Projectscontroller::class);
         Route::resource('tecnologies', Tecnologiescontroller::class);
-        Route::resource('type', Typescontroller::class);
+        Route::resource('types', Typescontroller::class);
     });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
