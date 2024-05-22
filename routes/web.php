@@ -4,6 +4,9 @@ use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Projectscontroller;
+use App\Http\Controllers\Admin\Typescontroller;
+use App\Http\Controllers\Admin\Tecnologiescontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +27,9 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         // Qui sono inserite tutte le rotte protette da auth
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+        Route::resource('projects', Projectscontroller::class);
+        Route::resource('tecnologies', Tecnologiescontroller::class);
+        Route::resource('type', Typescontroller::class);
     });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
